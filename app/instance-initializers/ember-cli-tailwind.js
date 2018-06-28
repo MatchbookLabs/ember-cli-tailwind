@@ -13,6 +13,12 @@ const TailwindApplicationRoute = Route.extend({
 });
 
 export function initialize(appInstance) {
+  if (typeof appInstance.lookup !== 'function') {
+    // not compatible with ember 1.13
+    // & don't need to build in flabongo
+    return;
+  }
+
   let fastboot = appInstance.lookup('service:fastboot');
   let fastbootIsInstalled = fastboot;
   let fastbootIsNotInstalled = !fastboot;
